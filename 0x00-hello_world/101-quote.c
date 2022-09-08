@@ -1,9 +1,8 @@
-#include <stdio.h>
-#include <string.h>
 #include <unistd.h>
 /**
- * main - main block
- * Return: 1
+ * main-program entry point.
+ *
+ * Return: 1 on success.
  */
 int main(void)
 {
