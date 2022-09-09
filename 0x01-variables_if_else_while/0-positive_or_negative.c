@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
+
 /**
 * main - print if the random number is positive, zero or negative
 *
@@ -22,7 +23,7 @@ if (n > 0)
 	printf("%i is positive\n", n);
 }
 else if (n == 0)
-{
+:i{
 	printf("%i is zero\n", n);
 }
 else if (n < 0)
