@@ -16,7 +16,7 @@ int i;
  
 srant(time(0));
 n = rant() - RAND_MAX / 2;
-i = n %10;
+i = n % 10;
 
 if (i > 5)
 {
