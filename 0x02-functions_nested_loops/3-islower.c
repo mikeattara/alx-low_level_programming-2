@@ -1,15 +1,19 @@
-#include "main.h"
+#include "holberton.h"
 /**
-* _islower - A function to check for lowercase alphabet
-*
-* Return: Always 0.
-*/
+ * _islower - check for lowercase character
+ * @c: contain the characters to check
+ *
+ * Return: 1 on success or 0 otherwise
+ */
 int _islower(int c)
 {
-	if (c >= 'a' && c <= 'z')
+
+	if (c >= 97 && c <= 122)
 	{
 		return (1);
 	}
 	else
+	{
 		return (0);
+	}
 }
