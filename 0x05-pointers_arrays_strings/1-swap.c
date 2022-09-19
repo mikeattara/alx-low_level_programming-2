@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * main - swap int
+ * main - swap_int
  * @a: pointer
  *
  * @b: pointer
