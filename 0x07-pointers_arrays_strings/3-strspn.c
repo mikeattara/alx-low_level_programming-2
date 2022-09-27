@@ -25,4 +25,3 @@ for (i = 0; accept[i]; i++)
 		return (x);
 	}
 }
-s++;
