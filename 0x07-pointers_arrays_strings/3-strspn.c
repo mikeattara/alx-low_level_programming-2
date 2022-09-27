@@ -1,27 +1,38 @@
 #include "main.h"
 /**
- * _strspn - get the lenght of prefix substring
- * @s:string
- * @accept:string
- * Return:unsigned int
+ * _strspn - this function gets the legth in bytes
+ *
+ * @s: string
+ * @accept: charachter to find
+ *
+ * Return: dest
  */
+
 unsigned int _strspn(char *s, char *accept)
 {
-unsigned int x;
-int i;
+	int i;
+	int x;
+	int z = 0;
+	int b = 0;
 
-x = 0;
-while (*s)
-{
-for (i = 0; accept[i]; i++)
-{
-	if (*s == accept[i])
+	while (accept[z] != '\0')
 	{
-		x++;
-		break;
+		z++;
 	}
-	else if (accept[i + 1] == '\0')
+	for (i = 0; i <= z; i++)
 	{
-		return (x);
+		for (x = 0; accept[x] != '\0'; x++)
+		{
+			if (s[i] == accept[x])
+			{
+				b++;
+				break;
+			}
+		}
+		if (accept[x] == '\0')
+		{
+			break;
+		}
 	}
+	return (i);
 }
