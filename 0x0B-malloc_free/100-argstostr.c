@@ -1,54 +1,39 @@
-#include "holberton.h"
 #include <stdlib.h>
 #include <stdio.h>
 
 /**
-  * argstostr - convert the params passed to the program to string
-  * @ac: the argument count
-  * @av: the argument vector
-  *
-  * Return: ...
-  */
+ * *argstostr - concatenates all arguments of program
+ *
+ * @ac: argument count
+ * @av: point to pointer to arguments
+ * Return: pointer to new string or NULL if failed
+ */
 char *argstostr(int ac, char **av)
 {
-	int ch = 0, i = 0, j = 0, k = 0;
-	char *s;
+	int i, k, n, size;
+	char *str;
 
 	if (ac == 0 || av == NULL)
 		return (NULL);
-
-	while (i < ac)
+	for (i = 0; i < ac; i++)
 	{
-		while (av[i][j])
-		{
-			ch++;
-			j++;
-		}
-
-		j = 0;
-		i++;
+		for (k = 0; av[i][k] != '\0'; k++)
+			;
+		size += k + 1;
 	}
-
-	s = malloc((sizeof(char) * ch) + ac + 1);
-
-	i = 0;
-	while (av[i])
+	str = malloc(size + 1);
+	if (str == 0)
+		return (NULL);
+	n = 0;
+	for (i = 0; i < ac; i++)
 	{
-		while (av[i][j])
+		for (k = 0; av[i][k] != '\0'; k++)
 		{
-			s[k] = av[i][j];
-			k++;
-			j++;
+			str[n] = av[i][k];
+			n++;
 		}
-
-		s[k] = '\n';
-
-		j = 0;
-		k++;
-		i++;
+		str[n] = '\n';
+		n++;
 	}
-
-	k++;
-	s[k] = '\0';
-	return (s);
+	return (str);
 }
