@@ -1,39 +1,76 @@
+#include "holberton.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 /**
- * *argstostr - concatenates all arguments of program
+ * wrdcnt - counts the number of words in a string
+ * @s: string to count
  *
- * @ac: argument count
- * @av: point to pointer to arguments
- * Return: pointer to new string or NULL if failed
+ * Return: int of number of words
  */
-char *argstostr(int ac, char **av)
+int wrdcnt(char *s)
 {
-	int i, k, n, size;
-	char *str;
+	int i, n = 0;
 
-	if (ac == 0 || av == NULL)
-		return (NULL);
-	for (i = 0; i < ac; i++)
+	for (i = 0; s[i]; i++)
 	{
-		for (k = 0; av[i][k] != '\0'; k++)
-			;
-		size += k + 1;
-	}
-	str = malloc(size + 1);
-	if (str == 0)
-		return (NULL);
-	n = 0;
-	for (i = 0; i < ac; i++)
-	{
-		for (k = 0; av[i][k] != '\0'; k++)
+		if (s[i] == ' ')
 		{
-			str[n] = av[i][k];
-			n++;
+			if (s[i + 1] != ' ' && s[i + 1] != '\0')
+				n++;
 		}
-		str[n] = '\n';
-		n++;
+		else if (i == 0)
+			n++;
 	}
-	return (str);
+	n++;
+	return (n);
+}
+
+/**
+ * strtow - splits a string into words
+ * @str: string to split
+ *
+ * Return: pointer to an array of strings
+ */
+char **strtow(char *str)
+{
+	int i, j, k, l, n = 0, wc = 0;
+	char **w;
+
+	if (str == NULL || *str == '\0')
+		return (NULL);
+	n = wrdcnt(str);
+	if (n == 1)
+		return (NULL);
+	w = (char **)malloc(n * sizeof(char *));
+	if (w == NULL)
+		return (NULL);
+	w[n - 1] = NULL;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
+		{
+			for (j = 1; str[i + j] != ' ' && str[i + j]; j++)
+				;
+			j++;
+			w[wc] = (char *)malloc(j * sizeof(char));
+			j--;
+			if (w[wc] == NULL)
+			{
+				for (k = 0; k < wc; k++)
+					free(w[k]);
+				free(w[n - 1]);
+				free(w);
+				return (NULL);
+			}
+			for (l = 0; l < j; l++)
+				w[wc][l] = str[i + l];
+			w[wc][l] = '\0';
+			wc++;
+			i += j;
+		}
+		else
+			i++;
+	}
+	return (w);
 }
