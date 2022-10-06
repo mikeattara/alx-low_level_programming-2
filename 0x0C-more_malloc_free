@@ -1,5 +1,5 @@
-#ifndef _SAMPLE_HEADER_H_
-#define _SAMPLE_HEADER_H_
+#ifndef _MAIN_H_
+#define MAIN_H_
 
 int _putchar(char c);
 void *malloc_checked(unsigned int b);
