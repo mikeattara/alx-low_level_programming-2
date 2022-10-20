@@ -1,26 +1,23 @@
-#include <stdio.h>
 #include "lists.h"
+
 /**
-*print_list - print string and length of string for each element of 'h'
-*@h: pointer to first element of list
-*Return: length of list
-*/
+ * print_list - print list items
+ * @h: the list to print
+ *
+ * Description: Print each list item, prefixed by it's length, formatted using
+ * "[%d] %s\n". If a list item is NULL, print it as "(nil)" with zero length.
+ *
+ * Return: size of the list
+ */
 size_t print_list(const list_t *h)
 {
-	size_t size = 0;
-
-	while (h)
+	if (h)
 	{
-		if (h->str == NULL)
-		{
-			printf("[%u] (nil)\n", h->len);
-			h = h->next;
-			++size;
-			continue;
-		}
-		printf("[%u] %s\n", h->len, h->str);
-		h = h->next;
-		++size;
+		if (h->str)
+			printf("[%d] %s\n", h->len, h->str);
+		else
+			printf("[0] (nil)\n");
+		return (print_list(h->next) + 1);
 	}
-	return (size);
+	return (0);
 }
