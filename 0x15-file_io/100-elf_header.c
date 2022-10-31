@@ -1,67 +1,46 @@
+#include <stdio.h>
 #include "main.h"
-#include <stdarg.h>
+
+/*void check_elf(unsigned char *e_ident);
+void print_magic(unsigned char *e_ident);
+void print_class(unsigned char *e_ident);
+void print_data(unsigned char *e_ident);
+void print_version(unsigned char *e_ident);
+void print_abi(unsigned char *e_ident);
+void print_osabi(unsigned char *e_ident);
+void print_type(unsigned int e_type, unsigned char *e_ident);
+void print_entry(unsigned long int e_entry, unsigned char *e_ident);
+void close_elf(int elf);*/
 
 /**
- * error_handler - handles errors for cp
- * @exit_code: exit code
- * @message: error message
- * @type: data type for format
- */
-
-void error_handler(int exit_code, char *message, char type, ...)
+  *check_elf - checks if a file is an ELF file.
+  *@e_ident: a pointer to an array containing the ELF magis number
+  *Description: if the file is not ELF file exit 98
+  */
+/*void check_elf(unsigned char *e_ident)
 {
-	va_list args;
-
-	va_start(args, type);
-	if (type == 's')
-		dprintf(STDERR_FILENO, message, va_arg(args, char *));
-	else if (type == 'd')
-		dprintf(STDERR_FILENO, message, va_arg(args, int));
-	else if (type == 'N')
-		dprintf(STDERR_FILENO, message, "");
-	else
-		dprintf(STDERR_FILENO, "Error: Does not match any type\n");
-	va_end(args);
-	exit(exit_code);
-}
+	int index;
+	for (index = 0; index < 4; index++)
+	{
+		if (e_ident[index] != 127 &&
+		    e_ident[index] != 'E' &&
+		    e_ident[index] != 'L' &&
+		    e_ident[index] != 'F')
+		{
+			dprintf(STDERR_FILENO, "Error: not an ELF file\n");
+			exit(98);
+		}
+	}
+}*/
 
 /**
- * main - copies the content of a file to another file
- * @argc: number of arguments
- * @argv: array of arguments
- * Return:  0 (Always)
+ * main - The entry point for program to get header of ELF file
+ * @argc: The number of arguments
+ * @argv: The pointer to array of arguments
+ * Return: 1 on success, error code on failure
  */
-
 int main(int argc, char *argv[])
 {
-	char buffer[1024];
-	int fd_s, fd_d;
-	ssize_t bytes_read, bytes_written;
-
-	if (argc != 3)
-		error_handler(97, "Usage: cp file_from file_to\n", 'N');
-
-	fd_s = open(argv[1], O_RDONLY);
-	if (fd_s == -1)
-		error_handler(98, "Error: Can't read from file %s\n", 's', argv[1]);
-
-	fd_d = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	if (fd_d == -1)
-		error_handler(99, "Error: Can't write to %s\n", 's', argv[2]);
-
-	while ((bytes_read = read(fd_s, buffer, 1024)) > 0)
-	{
-		bytes_written = write(fd_d, buffer, bytes_read);
-		if (bytes_written == -1)
-			error_handler(99, "Error: Can't write to %s\n", 's', argv[2]);
-	}
-
-	if (bytes_read == -1)
-		error_handler(98, "Error: Can't read from file %s\n", 's', argv[1]);
-	if (close(fd_s) == -1)
-		error_handler(100, "Error: Can't close fd %d\n", 'd', fd_s);
-	if (close(fd_d) == -1)
-		error_handler(100, "Error: Can't close fd %d\n", 'd', fd_d);
-
-	return (0);
+	printf("argc:%d, argv:%p\n", argc, (void *)*argv);
+	return (1);
 }
